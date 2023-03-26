@@ -7,7 +7,6 @@ export default function SeasonList() {
   const { showId } = useParams();
   const { showName } = useLocation().state;
   const [seasonData, setSeasonData] = useState([]);
-  console.log(showName);
 
   useEffect(() => {
     fetchSeasonData(showId).then((data) => {
@@ -17,10 +16,15 @@ export default function SeasonList() {
 
   return (
     <div>
-      {console.log(seasonData)}
       <h1>Season List for {showName}</h1>
       {seasonData.map((singleSeason, index) => {
-        return <Season key={index} singleSeasonData={singleSeason} />;
+        return (
+          <Season
+            key={index}
+            singleSeasonData={singleSeason}
+            showInfo={{ showName: showName, showId: showId }}
+          />
+        );
       })}
     </div>
   );

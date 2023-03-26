@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Homepage from "./components/Homepage";
 import NotFound from "./components/NotFound";
 import SeasonList from "./components/SeasonList";
+import EpisodeList from "./components/EpisodeList";
 import "./stylesheets/App.css";
 
 function App() {
@@ -9,8 +10,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/shows">
-          <Route path=":showId" element={<SeasonList />} />
+        <Route path="/shows/">
+          <Route path=":showId" index element={<SeasonList />} />
+          <Route path=":showId/seasons/:seasonId" element={<EpisodeList />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -15,3 +15,9 @@ export const fetchSeasonData = async (showId) => {
     (response) => response.json()
   );
 };
+
+export const fetchSeasonEpisodeData = async (seasonId) => {
+  return fetch(
+    `https://api.tvmaze.com/seasons/${seasonId}?embed=episodes`
+  ).then((response) => response.json());
+};
