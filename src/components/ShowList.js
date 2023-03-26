@@ -11,6 +11,7 @@ class ShowList extends Component {
             return (
               <Show
                 key={element.show.id}
+                id={element.show.id}
                 name={element.show.name}
                 image={element.show.image}
                 yearPremiered={element.show.premiered}
@@ -22,6 +23,7 @@ class ShowList extends Component {
             return (
               <Show
                 key={element.id}
+                id={element.id}
                 name={element.name}
                 image={element.image}
                 yearPremiered={element.premiered}

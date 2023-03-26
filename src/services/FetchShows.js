@@ -1,11 +1,12 @@
-export default (query) => {
-  if (query == "") {
-    return fetch(`http://api.tvmaze.com/shows?page=0`).then((response) =>
-      response.json()
-    );
+let showData = async (query) => {
+  if (query === "") {
+    const response = await fetch(`http://api.tvmaze.com/shows?page=0`);
+    return await response.json();
   } else {
-    return fetch(`http://api.tvmaze.com/search/shows?q=${query}`).then(
-      (response) => response.json()
+    const response_1 = await fetch(
+      `http://api.tvmaze.com/search/shows?q=${query}`
     );
+    return await response_1.json();
   }
 };
+export default showData;

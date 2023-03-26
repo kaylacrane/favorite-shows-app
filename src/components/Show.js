@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Show extends Component {
   render() {
-    const { name, image, yearPremiered, rating, genres } = this.props;
+    const { id, name, image, yearPremiered, rating, genres } = this.props;
     return (
-      <div>
+      <Link to={"/shows/" + id}>
         <h2>{name}</h2>
         <img
           src={
@@ -15,7 +16,7 @@ class Show extends Component {
         <p>Premiered: {yearPremiered}</p>
         <p>Rating: {rating ? rating : "Not available"}</p>
         <p>Genres: {genres.join(", ")}</p>
-      </div>
+      </Link>
     );
   }
 }
