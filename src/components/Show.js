@@ -5,7 +5,7 @@ class Show extends Component {
   render() {
     const { id, name, image, yearPremiered, rating, genres } = this.props;
     return (
-      <Link to={"/shows/" + id}>
+      <Link to={"/shows/" + id} state={{ showName: name }}>
         <h2>{name}</h2>
         <img
           src={

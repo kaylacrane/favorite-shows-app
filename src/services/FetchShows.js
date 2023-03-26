@@ -1,12 +1,17 @@
-let showData = async (query) => {
+export const fetchShowData = (query) => {
   if (query === "") {
-    const response = await fetch(`http://api.tvmaze.com/shows?page=0`);
-    return await response.json();
-  } else {
-    const response_1 = await fetch(
-      `http://api.tvmaze.com/search/shows?q=${query}`
+    return fetch(`https://api.tvmaze.com/shows?page=0`).then((response) =>
+      response.json()
     );
-    return await response_1.json();
+  } else {
+    return fetch(`https://api.tvmaze.com/search/shows?q=${query}`).then(
+      (response) => response.json()
+    );
   }
 };
-export default showData;
+
+export const fetchSeasonData = async (showId) => {
+  return fetch(`https://api.tvmaze.com/shows/${showId}/seasons`).then(
+    (response) => response.json()
+  );
+};

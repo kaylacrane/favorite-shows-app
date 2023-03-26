@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import fetchShows from "../services/FetchShows";
+import { fetchShowData } from "../services/FetchShows";
 import Search from "./Search";
 import ShowList from "./ShowList";
 
@@ -23,13 +23,13 @@ export default class Homepage extends Component {
   }
 
   componentDidMount() {
-    fetchShows(this.state.searchText).then((data) => {
+    fetchShowData(this.state.searchText).then((data) => {
       this.setState({ shows: data });
     });
   }
 
   componentDidUpdate() {
-    fetchShows(this.state.searchText).then((data) => {
+    fetchShowData(this.state.searchText).then((data) => {
       this.setState({ shows: data });
     });
   }

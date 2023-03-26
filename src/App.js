@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/shows">
-          <Route path=":showId" element={<SeasonList seasonInfo={"blah"} />} />
+          <Route path=":showId" element={<SeasonList />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
