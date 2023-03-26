@@ -6,9 +6,14 @@ class Show extends Component {
     return (
       <div>
         <h2>{name}</h2>
-        <img src={image.medium} alt="" height="150px" />
+        <img
+          src={
+            image ? image.medium : `https://placehold.co/200x300?text=${name}`
+          }
+          alt=""
+        />
         <p>Premiered: {yearPremiered}</p>
-        <p>Rating: {rating}</p>
+        <p>Rating: {rating ? rating : "Not available"}</p>
         <p>Genres: {genres.join(", ")}</p>
       </div>
     );

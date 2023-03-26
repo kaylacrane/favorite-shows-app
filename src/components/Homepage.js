@@ -28,6 +28,12 @@ export default class Homepage extends Component {
     });
   }
 
+  componentDidUpdate() {
+    fetchShows(this.state.searchText).then((data) => {
+      this.setState({ shows: data });
+    });
+  }
+
   render() {
     return (
       <div>
