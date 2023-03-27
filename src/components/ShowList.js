@@ -1,41 +1,39 @@
-import React, { Component } from "react";
+import React from "react";
 import Show from "./Show";
 
-class ShowList extends Component {
-  render() {
-    const { showList } = this.props;
-    return (
-      <ul>
-        {showList.map((element) => {
-          if (element.show) {
-            return (
-              <Show
-                key={element.show.id}
-                id={element.show.id}
-                name={element.show.name}
-                image={element.show.image}
-                yearPremiered={element.show.premiered}
-                rating={element.show.rating.average}
-                genres={element.show.genres}
-              />
-            );
-          } else {
-            return (
-              <Show
-                key={element.id}
-                id={element.id}
-                name={element.name}
-                image={element.image}
-                yearPremiered={element.premiered}
-                rating={element.rating.average}
-                genres={element.genres}
-              />
-            );
-          }
-        })}
-      </ul>
-    );
-  }
-}
+export default function ShowList(props) {
+  const { showList } = props;
 
-export default ShowList;
+  let shows = showList.map((element) => {
+    if (element.show) {
+      return element.show;
+    } else {
+      return element;
+    }
+  });
+
+  return (
+    <ul>
+      {shows.map((element) => {
+        return (
+          <Show
+            key={element.id}
+            id={element.id}
+            name={element.name}
+            image={element.image}
+            yearPremiered={element.premiered}
+            rating={element.rating.average}
+            genres={element.genres}
+          />
+        );
+      })}
+      <button
+        onClick={(event) => {
+          console.log(event);
+        }}
+      >
+        Show more
+      </button>
+    </ul>
+  );
+}

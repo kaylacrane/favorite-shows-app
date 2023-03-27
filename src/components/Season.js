@@ -13,7 +13,7 @@ export default function Season(props) {
       <p>Number of episodes: ??? </p>
       <img
         src={
-          image ? image.medium : `https://placehold.co/200x300?text=${showName}`
+          image ? image.medium : `https://placehold.co/100x200?text=${showName}`
         }
         alt=""
       />

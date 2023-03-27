@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, Link } from "react-router-dom";
 import { fetchSeasonData } from "../services/FetchShows";
 import Season from "./Season";
 
@@ -16,6 +16,7 @@ export default function SeasonList() {
 
   return (
     <div>
+      <Link to={"/"}>Return to Homepage</Link>
       <h1>Season List for {showName}</h1>
       {seasonData.map((singleSeason, index) => {
         return (

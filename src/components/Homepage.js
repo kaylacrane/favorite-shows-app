@@ -1,50 +1,40 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchShowData } from "../services/FetchShows";
+import NotFound from "./NotFound";
 import Search from "./Search";
 import ShowList from "./ShowList";
 
-export default class Homepage extends Component {
-  constructor(props) {
-    super(props);
-    this.searchHandler = this.searchHandler.bind(this);
-    this.resetHandler = this.resetHandler.bind(this);
-    this.state = {
-      searchText: "",
-      shows: [],
-    };
-  }
+export default function Homepage() {
+  const [searchText, setSearchText] = useState("");
+  const [showsList, setShowsList] = useState([]);
 
-  searchHandler(data) {
-    this.setState({ [data.key]: data.value });
-  }
+  const searchHandler = (event) => {
+    setSearchText(event.target.value);
+  };
 
-  resetHandler() {
-    this.setState({ searchText: "" });
-  }
+  const resetHandler = () => {
+    setSearchText("");
+  };
 
-  componentDidMount() {
-    fetchShowData(this.state.searchText).then((data) => {
-      this.setState({ shows: data });
+  useEffect(() => {
+    fetchShowData(searchText).then((data) => {
+      setShowsList(data);
     });
-  }
+  }, [searchText]);
 
-  componentDidUpdate() {
-    fetchShowData(this.state.searchText).then((data) => {
-      this.setState({ shows: data });
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <h1>Homepage</h1>
-        <Search
-          searchText={this.state.searchText}
-          searchHandler={this.searchHandler}
-          resetHandler={this.resetHandler}
-        />
-        <ShowList showList={this.state.shows} />
-      </div>
-    );
-  }
+  return (
+    <>
+      <h1>Homepage</h1>
+      <Search
+        searchText={searchText}
+        searchHandler={searchHandler}
+        resetHandler={resetHandler}
+      />
+      {showsList && showsList.length > 0 ? (
+        <ShowList showList={showsList} />
+      ) : (
+        <NotFound />
+      )}
+    </>
+  );
 }
