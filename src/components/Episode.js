@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Episode(props) {
-  const { number, image, summary } = props.singleEpisodeData;
+  const { number, image, summary, airstamp } = props.singleEpisodeData;
   const { showName, showId } = props.showInfo;
   return (
     <div>
@@ -12,6 +12,7 @@ export default function Episode(props) {
         }
         alt=""
       />
+      <p>Aired on: {airstamp}</p>
       {summary ? summary : ""}
     </div>
   );

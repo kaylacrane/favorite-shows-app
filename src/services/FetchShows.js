@@ -10,14 +10,14 @@ export const fetchShowData = (query) => {
   }
 };
 
-export const fetchSeasonData = async (showId) => {
+export const fetchSeasonData = (showId) => {
   return fetch(`https://api.tvmaze.com/shows/${showId}/seasons`).then(
     (response) => response.json()
   );
 };
 
-export const fetchSeasonEpisodeData = async (seasonId) => {
-  return fetch(
-    `https://api.tvmaze.com/seasons/${seasonId}?embed=episodes`
-  ).then((response) => response.json());
+export const fetchSeasonEpisodeData = (showId) => {
+  return fetch(`https://api.tvmaze.com/shows/${showId}/episodes`).then(
+    (response) => response.json()
+  );
 };
