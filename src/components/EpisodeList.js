@@ -3,6 +3,7 @@ import { useLocation, useParams, Link } from "react-router-dom";
 import { fetchSeasonEpisodeData } from "../services/FetchShows";
 import Episode from "./Episode";
 import NotFound from "./NotFound";
+import "../stylesheets/EpisodeList.scss";
 
 export default function EpisodeList() {
   const { seasonId } = useParams();
@@ -11,15 +12,19 @@ export default function EpisodeList() {
 
   useEffect(() => {
     fetchSeasonEpisodeData(showId).then((data) => {
+      console.log(data);
       data = data.filter((episode) => episode.season == seasonId);
       setSeasonEpisodeData(data);
     });
   }, []);
   return (
-    <div>
-      <Link to={"/"}>Return to Homepage</Link>
-      <h1>
-        Episode List for {showName}: Season {seasonId}
+    <div className="episode-list">
+      <Link to={"/"} className="episode-list__home-link">
+        Return to Homepage
+      </Link>
+      <h1 className="episode-list__title">
+        {showName}: <br />
+        Season {seasonId} Episodes
       </h1>
       {seasonEpisodeData.length > 0 ? (
         seasonEpisodeData.map((singleEpisode, index) => {

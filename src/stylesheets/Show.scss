@@ -1,0 +1,42 @@
+@import "variables";
+
+.show-card {
+    text-align: center;
+    border: 1px solid $secondary-color;
+    border-radius: 15px;
+    background-color: $primary-color;
+
+    @media only screen and (min-width: $sm-device) {
+        width: 250px;
+    }
+
+    &__link {
+        text-decoration: none;
+        color: $color-text;
+        display: block;
+    }
+
+    &__title {
+        color: $tertiary-color;
+    }
+
+    &__cover {
+        max-height: 250px;
+    }
+    
+    &__text {
+        display: flex;
+        flex-direction: column;
+    }
+    &__favorites {
+        &-msg {
+        }
+
+        &-btn {
+            color: $secondary-color;
+            background-color: $tertiary-color;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+    }
+}

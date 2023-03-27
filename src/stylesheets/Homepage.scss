@@ -1,0 +1,12 @@
+@import "variables";
+
+.homepage {
+    background-color: $tertiary-color;
+    padding: 20px;
+
+    &__title {
+        color: $primary-color;
+        font-size: 26px;
+        text-align: center;
+    }
+}

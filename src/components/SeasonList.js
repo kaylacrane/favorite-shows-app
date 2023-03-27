@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useParams, Link } from "react-router-dom";
 import { fetchSeasonData } from "../services/FetchShows";
 import Season from "./Season";
+import "../stylesheets/SeasonList.scss";
 
 export default function SeasonList() {
   const { showId } = useParams();
@@ -15,9 +16,14 @@ export default function SeasonList() {
   }, []);
 
   return (
-    <div>
-      <Link to={"/"}>Return to Homepage</Link>
-      <h1>Season List for {showName}</h1>
+    <div className="season-list">
+      <Link to={"/"} className="season-list__home-link">
+        Return to Homepage
+      </Link>
+      <h1 className="season-list__title">
+        {showName}:<br />
+        All Seasons
+      </h1>
       {seasonData.map((singleSeason, index) => {
         return (
           <Season

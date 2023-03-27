@@ -1,0 +1,26 @@
+@import "variables";
+
+.show-list {
+    &__next-page-btn {
+        background-color: $secondary-color;
+        border-radius: 10px;
+        color: $color-text;
+        display: block;
+        margin: auto;
+        padding: 10px 20px;
+        width: fit-content;
+        
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+    
+        @media only screen and (min-width: $sm-device) {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+}

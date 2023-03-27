@@ -1,0 +1,35 @@
+@import "variables";
+
+.season-card {
+    background-color: $secondary-color;
+    border: 1px solid $primary-color;
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+
+    &__link {
+        text-decoration: none;
+        color: $color-text;
+        display: block;
+    }
+
+    &__title {
+        color: $tertiary-color;
+        font-size: 22px;
+    }
+    
+    &__text {
+        display: flex;
+        flex-direction: column;
+        margin: 10px auto;
+    }
+
+    &__cover {
+        max-height: 280px;
+        border-radius: 10px;
+    }
+
+    &__summary {
+        
+    }
+}

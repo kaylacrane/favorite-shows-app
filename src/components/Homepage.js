@@ -3,6 +3,7 @@ import { fetchShowData } from "../services/FetchShows";
 import NotFound from "./NotFound";
 import Search from "./Search";
 import ShowList from "./ShowList";
+import "../stylesheets/Homepage.scss";
 
 export default function Homepage() {
   const [searchText, setSearchText] = useState("");
@@ -23,8 +24,8 @@ export default function Homepage() {
   }, [searchText]);
 
   return (
-    <>
-      <h1>Homepage</h1>
+    <div className="homepage">
+      <h1 className="homepage__title">TVmaze Series Search</h1>
       <Search
         searchText={searchText}
         searchHandler={searchHandler}
@@ -35,6 +36,6 @@ export default function Homepage() {
       ) : (
         <NotFound />
       )}
-    </>
+    </div>
   );
 }

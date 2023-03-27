@@ -1,5 +1,6 @@
 import React from "react";
 import Show from "./Show";
+import "../stylesheets/ShowList.scss";
 
 export default function ShowList(props) {
   const { showList } = props;
@@ -13,27 +14,38 @@ export default function ShowList(props) {
   });
 
   return (
-    <ul>
-      {shows.map((element) => {
-        return (
-          <Show
-            key={element.id}
-            id={element.id}
-            name={element.name}
-            image={element.image}
-            yearPremiered={element.premiered}
-            rating={element.rating.average}
-            genres={element.genres}
-          />
-        );
-      })}
+    <div className="show-list">
       <button
+        className="show-list__next-page-btn"
         onClick={(event) => {
           console.log(event);
         }}
       >
-        Show more
+        Show next page
       </button>
-    </ul>
+      <ul className="show-list__list">
+        {shows.map((element) => {
+          return (
+            <Show
+              key={element.id}
+              id={element.id}
+              name={element.name}
+              image={element.image}
+              yearPremiered={element.premiered}
+              rating={element.rating.average}
+              genres={element.genres}
+            />
+          );
+        })}
+        <button
+          className="show-list__load-more-btn"
+          onClick={(event) => {
+            console.log(event);
+          }}
+        >
+          Show more
+        </button>
+      </ul>
+    </div>
   );
 }

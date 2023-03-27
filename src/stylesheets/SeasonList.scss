@@ -1,0 +1,19 @@
+@import "variables";
+
+.season-list {
+    background-color: $primary-color;
+    display: flex;
+    flex-direction: column;
+
+    &__home-link {
+        color: $tertiary-color;
+        margin: auto;
+    }
+
+    &__title {
+        color: $tertiary-color;
+        font-size: 28px;
+        margin: auto;
+        text-align: center;
+    }
+}

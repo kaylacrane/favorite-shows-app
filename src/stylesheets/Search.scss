@@ -1,0 +1,25 @@
+@import "variables";
+
+.search {
+    background-color: $secondary-color;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    margin: 20px auto;
+    max-width: 75%;
+    text-align: center;
+
+    &__text {
+
+    }
+    &__input {
+        font-size: 20px;
+        text-align: center;
+        padding: 8px;
+    }
+    &__reset-input-btn {
+        background-color: $primary-color;
+        font-size: 20px;
+    }
+}
