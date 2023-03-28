@@ -6,30 +6,64 @@ import ShowList from "./ShowList";
 import "../stylesheets/Homepage.scss";
 
 export default function Homepage() {
-  const [searchText, setSearchText] = useState("");
+  const [currentSearch, setCurrentSearch] = useState("");
+  const [inputText, setInputText] = useState("");
   const [showsList, setShowsList] = useState([]);
+  const [searchHistory, setSearchHistory] = useState(
+    JSON.parse(localStorage.getItem("recent-searches"))
+  );
 
-  const searchHandler = (event) => {
-    setSearchText(event.target.value);
+  const inputHandler = (event) => {
+    setInputText(event.target.value);
   };
 
   const resetHandler = () => {
-    setSearchText("");
+    setInputText("");
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    if (!inputText) {
+      return;
+    }
+    let newList = searchHistory;
+    if (newList) {
+      if (!newList.includes(inputText)) {
+        newList.unshift(inputText);
+      }
+      if (newList.length > 5) {
+        newList.pop();
+      }
+    } else {
+      newList = [inputText];
+    }
+    setSearchHistory(newList);
+    setCurrentSearch(inputText);
+    resetHandler();
+    localStorage.setItem("recent-searches", JSON.stringify(newList));
+  };
+
+  const clickHistoryHandler = (event) => {
+    const itemClicked = event.target.innerHTML;
+    setInputText(itemClicked);
   };
 
   useEffect(() => {
-    fetchShowData(searchText).then((data) => {
+    fetchShowData(currentSearch).then((data) => {
       setShowsList(data);
     });
-  }, [searchText]);
+  }, [currentSearch]);
 
   return (
     <div className="homepage">
       <h1 className="homepage__title">TVmaze Series Search</h1>
       <Search
-        searchText={searchText}
-        searchHandler={searchHandler}
+        inputHandler={inputHandler}
+        inputText={inputText}
         resetHandler={resetHandler}
+        submitHandler={submitHandler}
+        searchHistory={searchHistory}
+        clickHistoryHandler={clickHistoryHandler}
       />
       {showsList && showsList.length > 0 ? (
         <ShowList showList={showsList} />
