@@ -12,6 +12,25 @@ export default function Homepage() {
   const [searchHistory, setSearchHistory] = useState(
     JSON.parse(localStorage.getItem("recent-searches"))
   );
+  const [savedFavs, setSavedFavs] = useState(
+    JSON.parse(localStorage.getItem("saved-favs"))
+  );
+
+  const favoritesHandler = (event) => {
+    event.preventDefault();
+    const showId = `${event.target.dataset.showId}`;
+    let favsList = JSON.parse(localStorage.getItem("saved-favs"));
+    if (!favsList) {
+      favsList = [showId];
+    } else if (favsList && favsList.includes(showId)) {
+      const index = favsList.indexOf(showId);
+      favsList.splice(index, 1);
+    } else {
+      favsList.push(showId);
+    }
+    localStorage.setItem("saved-favs", JSON.stringify(favsList));
+    setSavedFavs(favsList);
+  };
 
   const inputHandler = (event) => {
     setInputText(event.target.value);
@@ -66,7 +85,11 @@ export default function Homepage() {
         clickHistoryHandler={clickHistoryHandler}
       />
       {showsList && showsList.length > 0 ? (
-        <ShowList showList={showsList} />
+        <ShowList
+          showList={showsList}
+          savedFavs={savedFavs}
+          favoritesHandler={favoritesHandler}
+        />
       ) : (
         <NotFound />
       )}

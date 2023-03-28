@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../stylesheets/Search.scss";
 
 export default function Search(props) {

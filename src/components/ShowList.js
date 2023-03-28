@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Show from "./Show";
 import "../stylesheets/ShowList.scss";
 
 export default function ShowList(props) {
-  const { showList } = props;
+  const { showList, savedFavs, favoritesHandler } = props;
 
   let shows = showList.map((element) => {
     if (element.show) {
@@ -34,6 +34,8 @@ export default function ShowList(props) {
               yearPremiered={element.premiered}
               rating={element.rating.average}
               genres={element.genres}
+              savedFavs={savedFavs}
+              favoritesHandler={favoritesHandler}
             />
           );
         })}

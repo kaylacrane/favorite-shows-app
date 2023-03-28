@@ -3,14 +3,27 @@ import { Link } from "react-router-dom";
 import "../stylesheets/Show.scss";
 
 export default function Show(props) {
-  const { id, name, image, yearPremiered, rating, genres } = props;
+  const {
+    id,
+    name,
+    image,
+    yearPremiered,
+    rating,
+    genres,
+    savedFavs,
+    favoritesHandler,
+  } = props;
+
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const handleFavorites = (event) => {
-    const showId = `${event.target.dataset.showId}`;
+  useEffect(() => {
+    if (savedFavs && savedFavs.includes(id.toString())) {
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+  }, [savedFavs]);
 
-    event.preventDefault();
-  };
   return (
     <div className="show-card">
       <Link
@@ -32,17 +45,13 @@ export default function Show(props) {
           <span>Genres: {genres.join(", ")}</span>
         </div>
 
-        {isFavorite ? (
-          <p className="show-card__favorites-msg">You like this show</p>
-        ) : (
-          <button
-            className="show-card__favorites-btn"
-            data-show-id={id}
-            onClick={handleFavorites}
-          >
-            Add to favorites
-          </button>
-        )}
+        <button
+          className={`show-card__favorites-btn ${isFavorite ? "favorite" : ""}`}
+          data-show-id={id}
+          onClick={favoritesHandler}
+        >
+          {isFavorite ? "❌ Remove from favorites" : "✔️ Add to favorites"}
+        </button>
       </Link>
     </div>
   );
