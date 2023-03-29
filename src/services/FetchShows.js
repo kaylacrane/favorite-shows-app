@@ -1,6 +1,6 @@
-export const fetchShowData = (query) => {
+export const fetchShowData = (query, page = 0) => {
   if (query === "") {
-    return fetch(`https://api.tvmaze.com/shows?page=0`).then((response) =>
+    return fetch(`https://api.tvmaze.com/shows?page=${page}`).then((response) =>
       response.json()
     );
   } else {

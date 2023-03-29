@@ -1,15 +1,33 @@
 @import "variables";
 
 .show-list {
-    &__next-page-btn {
-        background-color: $secondary-color;
-        border-radius: 10px;
-        color: $color-text;
-        display: block;
-        margin: auto;
-        padding: 10px 20px;
-        width: fit-content;
-        
+    &__page-btns {
+        display: flex;
+        flex-direction: row;
+
+        &__previous {
+            background-color: $secondary-color;
+            border-radius: 10px;
+            color: $color-text;
+            display: block;
+            margin: auto;
+            padding: 10px 20px;
+            width: fit-content;
+
+            &.hidden{
+                display: none;
+            }
+        }
+
+        &__next {
+            background-color: $secondary-color;
+            border-radius: 10px;
+            color: $color-text;
+            display: block;
+            margin: auto;
+            padding: 10px 20px;
+            width: fit-content;
+        }
     }
 
     &__list {

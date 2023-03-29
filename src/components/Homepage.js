@@ -10,13 +10,16 @@ export default function Homepage() {
   const [currentSearch, setCurrentSearch] = useState("");
   const [inputText, setInputText] = useState("");
   const [showsList, setShowsList] = useState([]);
-  const [searchHistory, setSearchHistory] = useState(
-    JSON.parse(localStorage.getItem("recent-searches"))
-  );
+  const [searchHistory, setSearchHistory] = useState();
   const [savedFavs, setSavedFavs] = useState(
     JSON.parse(localStorage.getItem("saved-favs"))
   );
   const [showFavsList, setShowFavsList] = useState(false);
+  const [currentResultsPage, setCurrentResultsPage] = useState(
+    localStorage.getItem("current-results-page")
+      ? JSON.parse(localStorage.getItem("current-results-page"))
+      : 0
+  );
 
   const favoritesHandler = (event) => {
     event.preventDefault();
@@ -51,28 +54,29 @@ export default function Homepage() {
 
   const resetHandler = () => {
     setInputText("");
+    setCurrentResultsPage(0);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    if (!inputText) {
-      return;
-    }
     let newList = searchHistory;
     if (newList) {
-      if (!newList.includes(inputText)) {
+      if (!newList.includes(inputText) && inputText !== "") {
         newList.unshift(inputText);
       }
       if (newList.length > 5) {
         newList.pop();
       }
-    } else {
+    } else if (inputText) {
       newList = [inputText];
     }
     setSearchHistory(newList);
     setCurrentSearch(inputText);
+    setCurrentResultsPage(0);
     resetHandler();
-    localStorage.setItem("recent-searches", JSON.stringify(newList));
+    if (newList) {
+      localStorage.setItem("recent-searches", JSON.stringify(newList));
+    }
   };
 
   const clickHistoryHandler = (event) => {
@@ -87,11 +91,28 @@ export default function Homepage() {
     setShowFavsList(false);
   };
 
+  const resultsPageHandler = (event) => {
+    const action = event.target.dataset.action;
+    action === "previous"
+      ? setCurrentResultsPage(currentResultsPage - 1)
+      : setCurrentResultsPage(currentResultsPage + 1);
+  };
+
   useEffect(() => {
-    fetchShowData(currentSearch).then((data) => {
+    fetchShowData(currentSearch, currentResultsPage).then((data) => {
       setShowsList(data);
     });
-  }, [currentSearch]);
+    localStorage.setItem(
+      "current-results-page",
+      JSON.stringify(currentResultsPage)
+    );
+  }, [currentSearch, currentResultsPage]);
+
+  useEffect(() => {
+    if (localStorage.getItem("recent-searches")) {
+      setSearchHistory(JSON.parse(localStorage.getItem("recent-searches")));
+    }
+  }, [localStorage.getItem("recent-searches")]);
 
   return (
     <div className="homepage">
@@ -116,6 +137,8 @@ export default function Homepage() {
           showList={showsList}
           savedFavs={savedFavs}
           favoritesHandler={favoritesHandler}
+          resultsPageHandler={resultsPageHandler}
+          currentResultsPage={currentResultsPage}
         />
       ) : (
         <NotFound />

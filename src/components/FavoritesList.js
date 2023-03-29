@@ -28,7 +28,7 @@ export default function FavoritesList(props) {
           {favsList
             ? favsList.map((show) => {
                 return (
-                  <li>
+                  <li key={show.id}>
                     <button
                       className="favorites-list__modal__remove-btn"
                       onClick={favoritesHandler}

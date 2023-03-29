@@ -28,7 +28,6 @@ export default function Search(props) {
         setShowHistory(false);
       }}
     >
-      <span className="search__text">Search for shows</span>
       <input
         type="text"
         value={inputText}

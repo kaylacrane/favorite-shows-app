@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Show from "./Show";
 import "../stylesheets/ShowList.scss";
 
 export default function ShowList(props) {
-  const { showList, savedFavs, favoritesHandler } = props;
+  const {
+    showList,
+    savedFavs,
+    favoritesHandler,
+    resultsPageHandler,
+    currentResultsPage,
+  } = props;
 
   let shows = showList.map((element) => {
     if (element.show) {
@@ -15,14 +21,25 @@ export default function ShowList(props) {
 
   return (
     <div className="show-list">
-      <button
-        className="show-list__next-page-btn"
-        onClick={(event) => {
-          console.log(event);
-        }}
-      >
-        Show next page
-      </button>
+      <div className="show-list__page-btns">
+        <button
+          data-action="previous"
+          className={`show-list__page-btns__previous ${
+            currentResultsPage > 0 ? "" : "hidden"
+          }`}
+          onClick={(event) => resultsPageHandler(event)}
+        >
+          Prev page
+        </button>
+        <button
+          data-action="next"
+          className="show-list__page-btns__next"
+          onClick={(event) => resultsPageHandler(event)}
+        >
+          Next page
+        </button>
+      </div>
+
       <ul className="show-list__list">
         {shows.map((element) => {
           return (
