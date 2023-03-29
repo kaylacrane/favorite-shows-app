@@ -4,6 +4,7 @@ import NotFound from "./NotFound";
 import Search from "./Search";
 import ShowList from "./ShowList";
 import "../stylesheets/Homepage.scss";
+import FavoritesList from "./FavoritesList";
 
 export default function Homepage() {
   const [currentSearch, setCurrentSearch] = useState("");
@@ -15,21 +16,33 @@ export default function Homepage() {
   const [savedFavs, setSavedFavs] = useState(
     JSON.parse(localStorage.getItem("saved-favs"))
   );
+  const [showFavsList, setShowFavsList] = useState(false);
 
   const favoritesHandler = (event) => {
     event.preventDefault();
     const showId = `${event.target.dataset.showId}`;
+    const showName = `${event.target.dataset.showName}`;
+    const showInfo = { id: showId, name: showName };
+    console.log(event);
     let favsList = JSON.parse(localStorage.getItem("saved-favs"));
+    let actionPerformed = "";
     if (!favsList) {
-      favsList = [showId];
-    } else if (favsList && favsList.includes(showId)) {
-      const index = favsList.indexOf(showId);
+      favsList = [showInfo];
+      actionPerformed = "added";
+    } else if (favsList && favsList.find((show) => show.id === showId)) {
+      const index = favsList.indexOf(
+        favsList.find((show) => show.id === showId)
+      );
+      console.log(index);
       favsList.splice(index, 1);
+      actionPerformed = "removed";
     } else {
-      favsList.push(showId);
+      favsList.push(showInfo);
+      actionPerformed = "added";
     }
     localStorage.setItem("saved-favs", JSON.stringify(favsList));
     setSavedFavs(favsList);
+    alert(`You just ${actionPerformed} a show`);
   };
 
   const inputHandler = (event) => {
@@ -67,6 +80,13 @@ export default function Homepage() {
     setInputText(itemClicked);
   };
 
+  const openModalHandler = () => {
+    setShowFavsList(true);
+  };
+  const closeModalHandler = () => {
+    setShowFavsList(false);
+  };
+
   useEffect(() => {
     fetchShowData(currentSearch).then((data) => {
       setShowsList(data);
@@ -76,6 +96,13 @@ export default function Homepage() {
   return (
     <div className="homepage">
       <h1 className="homepage__title">TVmaze Series Search</h1>
+      <FavoritesList
+        favsList={savedFavs}
+        showFavsList={showFavsList}
+        favoritesHandler={favoritesHandler}
+        openModalHandler={openModalHandler}
+        closeModalHandler={closeModalHandler}
+      />
       <Search
         inputHandler={inputHandler}
         inputText={inputText}

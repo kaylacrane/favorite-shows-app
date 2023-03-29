@@ -39,14 +39,6 @@ export default function ShowList(props) {
             />
           );
         })}
-        <button
-          className="show-list__load-more-btn"
-          onClick={(event) => {
-            console.log(event);
-          }}
-        >
-          Show more
-        </button>
       </ul>
     </div>
   );

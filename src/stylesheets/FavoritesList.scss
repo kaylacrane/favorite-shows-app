@@ -1,0 +1,36 @@
+@import "variables";
+
+.favorites-list {
+
+    &__show-btn {}
+
+    &__modal {
+        background-color: $secondary-color;
+        border: 1px solid $tertiary-color;
+        padding: 15px 10px;
+        position: absolute;
+        left:50%; 
+        top:50%; 
+        transform: translate(-50%, -50%);
+        width: 200px;
+
+        &.hidden {
+            display:none
+        }
+
+        &__title {
+            font-size: 20px;
+            text-align: center;
+        }
+
+        &__close-bn {}
+
+        &__list > li {
+            padding: 3px 0;
+        }
+
+        &__remove-btn {
+            background-color: $tertiary-color;
+        }
+    }
+}

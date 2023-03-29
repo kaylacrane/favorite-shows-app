@@ -17,7 +17,7 @@ export default function Show(props) {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    if (savedFavs && savedFavs.includes(id.toString())) {
+    if (savedFavs && savedFavs.find((show) => show.id === id.toString())) {
       setIsFavorite(true);
     } else {
       setIsFavorite(false);
@@ -31,27 +31,31 @@ export default function Show(props) {
         state={{ showName: name }}
         className="show-card__link"
       >
-        <h2 className="show-card__title">{name}</h2>
-        <img
-          src={
-            image ? image.medium : `https://placehold.co/200x300?text=${name}`
-          }
-          alt=""
-          className="show-card__cover"
-        />
-        <div className="show-card__text">
+        <div className="show-card__image-block">
+          <img
+            src={
+              image ? image.medium : `https://placehold.co/200x300?text=${name}`
+            }
+            alt=""
+            className="show-card__image-block__cover"
+          />
+          <button
+            className={`show-card__image-block__favorites-btn ${
+              isFavorite ? "favorite" : ""
+            }`}
+            data-show-id={id}
+            data-show-name={name}
+            onClick={favoritesHandler}
+          >
+            {isFavorite ? "❌" : "Add Fav"}
+          </button>
+        </div>
+        <div className="show-card__text-block">
+          <h2 className="show-card__text-block__title">{name}</h2>
           <span>Premiered: {yearPremiered}</span>
           <span>Rating: {rating ? rating : "Not available"}</span>
           <span>Genres: {genres.join(", ")}</span>
         </div>
-
-        <button
-          className={`show-card__favorites-btn ${isFavorite ? "favorite" : ""}`}
-          data-show-id={id}
-          onClick={favoritesHandler}
-        >
-          {isFavorite ? "❌ Remove from favorites" : "✔️ Add to favorites"}
-        </button>
       </Link>
     </div>
   );
