@@ -48,7 +48,10 @@ export default function Search(props) {
                 <li
                   key={index}
                   className="search__search-history__item"
-                  onClick={(event) => clickHistoryHandler(event)}
+                  onClick={(event) => {
+                    clickHistoryHandler(event);
+                    setShowHistory(false);
+                  }}
                 >
                   {item}
                 </li>

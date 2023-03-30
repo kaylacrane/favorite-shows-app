@@ -1,20 +1,91 @@
 @import "variables";
 
 .episode-list {
-    background-color: $secondary-color;
+    align-items: center;
+    background-color: $primary-color;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    height: 100vh;
+    padding: 10px auto 20px;
+    overflow: hidden;
 
-    &__home-link {
-        color: $tertiary-color;
-        margin: auto;
+    &__nav {
+        display: flex;
+        justify-content: space-around;
+        width: 80%;
+        margin-top: 10px;
+
+        @media only screen and (min-width: $md-device) {
+            width: 50%;
+        }
+
+        &__seasons-link {
+            background-color: $secondary-color;
+            border-radius: 10px;
+            color: $tertiary-color;
+            font-size: 12px;
+            margin: auto;
+            padding: 5px 10px;
+            text-decoration: none;
+            text-align: center;
+            width: 30%;
+
+            @media only screen and (min-width: $md-device) {
+                width: 30%;
+            }
+
+            @media only screen and (min-width: $lg-device) {
+                width: 40%;
+            }
+        }
+    
+        &__home-link {
+            background-color: $secondary-color;
+            border-radius: 10px;
+            color: $tertiary-color;
+            font-size: 12px;
+            margin: auto;
+            padding: 5px 10px;
+            text-decoration: none;
+            text-align: center;
+            width: 30%;
+
+            @media only screen and (min-width: $md-device) {
+                width: 30%;
+            }
+
+            @media only screen and (min-width: $lg-device) {
+                width: 40%;
+            }
+        }
     }
 
     &__title {
+        color: $tertiary-color;
         font-size: 28px;
         margin: auto;
+        margin: 15px auto;
         text-align: center;
-
     }
+
+    &__episodes {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow-y: scroll;
+        width: 100%;
+        margin: 0 auto 10px;
+
+        @media only screen and (min-width: $md-device) {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        @media only screen and (min-width: $lg-device) {
+        }
+    }
+
+    
 }

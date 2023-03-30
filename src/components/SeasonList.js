@@ -18,21 +18,20 @@ export default function SeasonList() {
   return (
     <div className="season-list">
       <Link to={"/"} className="season-list__home-link">
-        Return to Homepage
+        Return to Home
       </Link>
-      <h1 className="season-list__title">
-        {showName}:<br />
-        All Seasons
-      </h1>
-      {seasonData.map((singleSeason, index) => {
-        return (
-          <Season
-            key={index}
-            singleSeasonData={singleSeason}
-            showInfo={{ showName: showName, showId: showId }}
-          />
-        );
-      })}
+      <h1 className="season-list__title">{showName}</h1>
+      <div className="season-list__seasons">
+        {seasonData.map((singleSeason, index) => {
+          return (
+            <Season
+              key={index}
+              singleSeasonData={singleSeason}
+              showInfo={{ showName: showName, showId: showId }}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -19,26 +19,33 @@ export default function EpisodeList() {
   }, []);
   return (
     <div className="episode-list">
-      <Link to={"/"} className="episode-list__home-link">
-        Return to Homepage
-      </Link>
+      <div className="episode-list__nav">
+        <Link to={-1} className="episode-list__nav__seasons-link">
+          Back to Seasons
+        </Link>
+        <Link to={"/"} className="episode-list__nav__home-link">
+          Return to Home
+        </Link>
+      </div>
       <h1 className="episode-list__title">
         {showName}: <br />
         Season {seasonId} Episodes
       </h1>
-      {seasonEpisodeData.length > 0 ? (
-        seasonEpisodeData.map((singleEpisode, index) => {
-          return (
-            <Episode
-              key={index}
-              showInfo={{ showName: showName, showId: showId }}
-              singleEpisodeData={singleEpisode}
-            />
-          );
-        })
-      ) : (
-        <NotFound />
-      )}
+      <div className="episode-list__episodes">
+        {seasonEpisodeData.length > 0 ? (
+          seasonEpisodeData.map((singleEpisode, index) => {
+            return (
+              <Episode
+                key={index}
+                showInfo={{ showName: showName, showId: showId }}
+                singleEpisodeData={singleEpisode}
+              />
+            );
+          })
+        ) : (
+          <NotFound />
+        )}
+      </div>
     </div>
   );
 }

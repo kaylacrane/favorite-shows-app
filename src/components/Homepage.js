@@ -139,6 +139,8 @@ export default function Homepage() {
           favoritesHandler={favoritesHandler}
           resultsPageHandler={resultsPageHandler}
           currentResultsPage={currentResultsPage}
+          showFavsList={showFavsList}
+          currentSearch={currentSearch}
         />
       ) : (
         <NotFound />

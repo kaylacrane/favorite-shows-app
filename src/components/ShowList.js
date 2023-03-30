@@ -9,6 +9,8 @@ export default function ShowList(props) {
     favoritesHandler,
     resultsPageHandler,
     currentResultsPage,
+    showFavsList,
+    currentSearch,
   } = props;
 
   let shows = showList.map((element) => {
@@ -33,14 +35,16 @@ export default function ShowList(props) {
         </button>
         <button
           data-action="next"
-          className="show-list__page-btns__next"
+          className={`show-list__page-btns__next ${
+            currentSearch == "" ? "" : "hidden"
+          }`}
           onClick={(event) => resultsPageHandler(event)}
         >
           Next page
         </button>
       </div>
 
-      <ul className="show-list__list">
+      <ul className={`show-list__shows ${showFavsList ? "noscroll" : ""}`}>
         {shows.map((element) => {
           return (
             <Show

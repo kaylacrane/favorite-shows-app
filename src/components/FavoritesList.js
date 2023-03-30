@@ -12,11 +12,10 @@ export default function FavoritesList(props) {
   return (
     <div className="favorites-list">
       <button className="favorites-list__show-btn" onClick={openModalHandler}>
-        Show All Favorites
+        ❤️ View Favorites List
       </button>
 
       <div className={`favorites-list__modal ${showFavsList ? "" : "hidden"}`}>
-        <h1 className="favorites-list__modal__title">Favorite Shows</h1>
         <button
           type="button"
           className="favorites-list__modal__close-btn"
@@ -24,23 +23,26 @@ export default function FavoritesList(props) {
         >
           Close
         </button>
+        <h1 className="favorites-list__modal__title">Favorite Shows</h1>
         <ul className="favorites-list__modal__list">
-          {favsList
-            ? favsList.map((show) => {
-                return (
-                  <li key={show.id}>
-                    <button
-                      className="favorites-list__modal__remove-btn"
-                      onClick={favoritesHandler}
-                      data-show-id={show.id}
-                    >
-                      ❌
-                    </button>
-                    <span>{show.name}</span>
-                  </li>
-                );
-              })
-            : ""}
+          {favsList && favsList.length ? (
+            favsList.map((show) => {
+              return (
+                <li key={show.id}>
+                  <button
+                    className="favorites-list__modal__remove-btn"
+                    onClick={favoritesHandler}
+                    data-show-id={show.id}
+                  >
+                    ❌
+                  </button>
+                  <span>{show.name}</span>
+                </li>
+              );
+            })
+          ) : (
+            <span>No favorites saved</span>
+          )}
         </ul>
       </div>
     </div>

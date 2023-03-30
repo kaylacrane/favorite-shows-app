@@ -16,18 +16,17 @@ export default function Season(props) {
         <h3 className="season-card__title">Season {number}</h3>
         <div className="season-card__text">
           <span>Number of episodes: {episodeOrder} </span>
-          <span>Premiered: {premiereDate}</span>
+          <span>Premiered: {premiereDate.slice(0, 4)}</span>
         </div>
         <img
           src={
             image
               ? image.medium
-              : `https://placehold.co/100x200?text=${showName}`
+              : `https://placehold.co/200x200?text=${showName}`
           }
           alt=""
           className="season-card__cover"
         />
-        {summary ? <div className="season-card__summary">{summary}</div> : ""}
       </Link>
     </div>
   );
