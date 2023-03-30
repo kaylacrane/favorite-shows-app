@@ -23,7 +23,10 @@ export default function EpisodeList() {
         <Link to={-1} className="episode-list__nav__seasons-link">
           Back to Seasons
         </Link>
-        <Link to={"/"} className="episode-list__nav__home-link">
+        <Link
+          to={"/favorite-shows-app"}
+          className="episode-list__nav__home-link"
+        >
           Return to Home
         </Link>
       </div>

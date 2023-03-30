@@ -17,7 +17,7 @@ export default function SeasonList() {
 
   return (
     <div className="season-list">
-      <Link to={"/"} className="season-list__home-link">
+      <Link to={"/favorite-shows-app"} className="season-list__home-link">
         Return to Home
       </Link>
       <h1 className="season-list__title">{showName}</h1>

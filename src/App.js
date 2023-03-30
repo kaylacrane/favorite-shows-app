@@ -9,7 +9,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/favorite-shows-app/" element={<Homepage />} />
         <Route path="/shows/">
           <Route path=":showId" index element={<SeasonList />} />
           <Route path=":showId/seasons/:seasonId" element={<EpisodeList />} />
